@@ -26,6 +26,10 @@ const SignUpPassport = (passport) =>{
                     newUser.dir = req.body.dir;
                     newUser.age = req.body.age;
                     newUser.tel = req.body.tel;
+                    newUser.thumbnail = req.body.thumbnail;
+                    if(req.body.name === "admin"){
+                        newUser.role = "admin"
+                    }
 
                     newUser.save((err)=>{
                         if(err){
