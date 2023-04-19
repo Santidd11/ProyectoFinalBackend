@@ -59,7 +59,7 @@ router.get('/:id', async (req, res) =>{
 })
 
 router.delete('/:id', async (req, res) =>{
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     carritoService.deleteById(id);
     const carrito = await carritoService.getById(id)
     res.json({
@@ -68,7 +68,7 @@ router.delete('/:id', async (req, res) =>{
 })
 
 router.get('/:id/productos', async (req, res) =>{
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     const carrito = await carritoService.getById(id);
     res.json({
         productos:carrito
@@ -78,7 +78,7 @@ router.get('/:id/productos', async (req, res) =>{
 
 router.post('/:id/:id_prod', async (req, res)=>{
     const id = req.params.id;
-    const idNewProducto = parseInt(req.params.id_prod);
+    const idNewProducto = req.params.id_prod;
     let carrito = {};
     const newProduct = await productosService.getById(idNewProducto);
     try{
@@ -97,10 +97,10 @@ router.post('/:id/:id_prod', async (req, res)=>{
     res.redirect(`/carrito/${id}`)
 })
 
-router.get('/:id/:id_prod', async (req, res) =>{
+router.get('/:id/:code_prod', async (req, res) =>{
     const id = req.params.id;
-    const id_prod = parseInt(req.params.id_prod);
-    await carritoService.deleteProductById(id, id_prod)
+    const code_prod = req.params.code_prod;
+    await carritoService.deleteProductByCode(id, code_prod)
     res.redirect(`/carrito/${id}`)
 })
 

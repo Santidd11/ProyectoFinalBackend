@@ -3,9 +3,9 @@
     <a href="/productos" class="text-dark">Productos</a>
     <a href="/carrito/{{idUser}}" class="text-dark">Carrito</a>
 </nav>
-<div class="row container-fluid">
+<div class="row container-fluid pt-5">
     {{#each productos}}
-        <div class="col-3">
+        <div class="col">
             <div class="card" style="width: 18rem;">
                 <img src={{this.thumbnail}} class="card-img-top" alt="...">
                 <div class="card-body">
@@ -13,7 +13,7 @@
                     <p class="card-text">{{this.description}} </p>
                     <p class="card-text">{{this.price}} </p>
                     {{#if ../idUser}}
-                    <form action="/carrito/{{../idUser}}/{{this.code}}" method="post">
+                    <form action="/carrito/{{../idUser}}/{{this.id}}" method="post">
                         <button type="submit" class="btn btn-primary">Agregar al carrito</button>
                     </form>
                     {{/if}}

@@ -23,7 +23,7 @@ class cartContainerMongo{
         try{
             let cart = await this.model.findOne({id:id})
             let newProducts = cart.productos;
-                    newProducts.push(product[0])
+                    newProducts.push(product)
                     await this.model.updateOne({id : id}, {$set: {"productos": newProducts}});
                     logger.info("Correcto");
         } catch(error){
@@ -68,17 +68,16 @@ class cartContainerMongo{
         }
     }
 
-    async deleteProductById(idCarrito, idProduct){
+    async deleteProductByCode(idCarrito, codeProduct){
         try{
             let carrito = await this.getById(idCarrito);
             let newStock = [];
-            for (const element of carrito) {
-                for (const producto of element.productos) {
-                        if(producto.code !== idProduct){
-                            newStock.push(producto)
-                        }
-                    }
+            const productos = carrito[0].productos
+            for (const producto of productos) {
+                if(producto.code !== parseInt(codeProduct)){
+                    newStock.push(producto)
                 }
+            }
             carrito.productos = newStock
             await this.updateByID(idCarrito, newStock);
             logger.info("Producto eliminado")

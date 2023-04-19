@@ -3,16 +3,15 @@
     <a href="/productos" class="text-dark">Productos</a>
     <a href="" class="text-dark disabled">Carrito</a>
 </nav>
-<div class="row container-fluid">
-
+<div class="row container-fluid justify-content-center">
     {{#if products}}
     {{#each products}}
-        <div class="col-3">
-            <div class="card" style="width: 18rem;">
+        <div class="col pt-5">
+            <div class="card mx-auto" style="width: 18rem;">
                 <img src={{this.thumbnail}} class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{this.title}}</h5>
-                    <p class="card-text">{{this.price}} </p>
+                    <p class="card-text">${{this.price}} </p>
                     <form action="/carrito/{{../id}}/{{this.code}}" method="get">
                         <button type="submit" class="btn btn-primary">Quitar del carrito</button>
                     </form>
@@ -21,8 +20,8 @@
         </div>
     {{/each}}
 
-    <form action="/envio/{{id}}" method="post">
-        <button type="submit" class="btn btn-primary">Realizar compra</button>
+    <form action="/envio/{{id}}" method="post" class="d-flex justify-content-center pt-5">
+        <button type="submit" class="btn btn-success">Realizar compra</button>
     </form>
     {{else}}
     <h2 class="text-center">No hay productos en su carrito</h2>
